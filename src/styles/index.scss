@@ -64,17 +64,24 @@ $width: $columns * $day-size + ($columns - 1) * $gap + 2 * $padding;
 }
 
 $start-offsets: (
-  sun: 0,
-  mon: 1,
-  tue: 2,
-  wed: 3,
-  thu: 4,
-  fri: 5,
-  sat: 6,
+  sun: 6,
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
 );
 
 @each $day-name, $offset in $start-offsets {
-  .calendar--start-#{$day-name} .calendar__day:nth-child(1) {
+  .calendar--start-day-#{$day-name} .calendar__day:nth-child(1) {
     margin-left: $offset * ($day-size + $gap);
+  }
+}
+
+@each $month-length in 28, 29, 30, 31 {
+  .calendar--month-length-#{$month-length}
+    .calendar__day:nth-child(n + #{$month-length + 1}) {
+    display: none;
   }
 }
